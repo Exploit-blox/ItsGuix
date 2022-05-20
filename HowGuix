@@ -1,5 +1,1122 @@
-_, Protected_by_MoonSecV2, Discord = 'discord.gg/gQEH2uZxUk'
+local NotificationHolder = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Module.Lua"))()
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/BocusLuke/UI/main/STX/Client.Lua"))()
+Notification:Notify(
+   {Title = "Notification", Description = "Welcome to Da Guix"},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
+   {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
+)
+
+wait(3)
+Notification:Notify(
+   {Title = "Notification", Description = "Wait 5 Sec"},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "option"},
+   {Image = "http://www.roblox.com/asset/?id=6023426923", ImageColor = Color3.fromRGB(255, 84, 84), Callback = function(State) print(tostring(State)) end}
+)
+
+wait(5)
+local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/Vape.txt")()
+local win = lib:Window("Da Guix",Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)
+
+local tab = win:Tab("Credits")
+tab:Label("Made By BEEST4R#2746")
+tab:Label("Notification By BocusLuke")
+
+tab:Button("Copy Link Youtube BEEST4R", function()
+Notification:Notify(
+   {Title = "Notification", Description = "Link Copied Check Clipboard"},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
+)
+local Link = "https://youtube.com/channel/UCTdAVqDHWZWERrPdTuyfEJA"
+
+if setclipboard then
+    setclipboard("https://"..Link)
+end
+end)
+
+tab:Button("Copy Link Discord", function()
+Notification:Notify(
+   {Title = "Notification", Description = "Link Copied Check Clipboard"},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
+)
+local Link = "https://discord.gg/rw4YzxnUhp"
+
+if setclipboard then
+    setclipboard("https://"..Link)
+end
+end)
+
+tab:Button("Last Page", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/MuNqikd3'))()
+end)
+
+local tab = win:Tab("player")
+tab:Button("Fly [X]", function()
+local plr = game.Players.LocalPlayer
+local mouse = plr:GetMouse()
+
+localplayer = plr
+
+if workspace:FindFirstChild("Core") then
+workspace.Core:Destroy()
+end
+
+local Core = Instance.new("Part")
+Core.Name = "Core"
+Core.Size = Vector3.new(0.05, 0.05, 0.05)
+
+spawn(function()
+Core.Parent = workspace
+local Weld = Instance.new("Weld", Core)
+Weld.Part0 = Core
+Weld.Part1 = localplayer.Character.LowerTorso
+Weld.C0 = CFrame.new(0, 0, 0)
+end)
+
+workspace:WaitForChild("Core")
+
+local torso = workspace.Core
+flying = true
+local speed=10
+local keys={a=false,d=false,w=false,s=false}
+local e1
+local e2
+local function start()
+local pos = Instance.new("BodyPosition",torso)
+local gyro = Instance.new("BodyGyro",torso)
+pos.Name="EPIXPOS"
+pos.maxForce = Vector3.new(math.huge, math.huge, math.huge)
+pos.position = torso.Position
+gyro.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+gyro.cframe = torso.CFrame
+repeat
+wait()
+localplayer.Character.Humanoid.PlatformStand=true
+local new=gyro.cframe - gyro.cframe.p + pos.position
+if not keys.w and not keys.s and not keys.a and not keys.d then
+speed=5
+end
+if keys.w then
+new = new + workspace.CurrentCamera.CoordinateFrame.lookVector * speed
+speed=speed+0
+end
+if keys.s then
+new = new - workspace.CurrentCamera.CoordinateFrame.lookVector * speed
+speed=speed+0
+end
+if keys.d then
+new = new * CFrame.new(speed,0,0)
+speed=speed+0
+end
+if keys.a then
+new = new * CFrame.new(-speed,0,0)
+speed=speed+0
+end
+if speed>10 then
+speed=5
+end
+pos.position=new.p
+if keys.w then
+gyro.cframe = workspace.CurrentCamera.CoordinateFrame*CFrame.Angles(-math.rad(speed*0),0,0)
+elseif keys.s then
+gyro.cframe = workspace.CurrentCamera.CoordinateFrame*CFrame.Angles(math.rad(speed*0),0,0)
+else
+gyro.cframe = workspace.CurrentCamera.CoordinateFrame
+end
+until flying == false
+if gyro then gyro:Destroy() end
+if pos then pos:Destroy() end
+flying=false
+localplayer.Character.Humanoid.PlatformStand=false
+speed=10
+end
+e1=mouse.KeyDown:connect(function(key)
+if not torso or not torso.Parent then flying=false e1:disconnect() e2:disconnect() return end
+if key=="w" then
+keys.w=true
+elseif key=="s" then
+keys.s=true
+elseif key=="a" then
+keys.a=true
+elseif key=="d" then
+keys.d=true
+elseif key=="x" then
+if flying==true then
+flying=false
+else
+flying=true
+start()
+end
+end
+end)
+e2=mouse.KeyUp:connect(function(key)
+if key=="w" then
+keys.w=false
+elseif key=="s" then
+keys.s=false
+elseif key=="a" then
+keys.a=false
+elseif key=="d" then
+keys.d=false
+end
+end)
+start()
+end)
+
+tab:Button("Shazam Fly [X]", function()
+_G.ShazamFlySpeed = 3
+loadstring(game:HttpGet(("https://raw.githubusercontent.com/Raycodex/Exploiting/main/Roblox/DaHoodShazamFly"), true))()
+end)
+
+tab:Button("Click Tp [Q]", function()
+plr = game.Players.LocalPlayer
+
+hum = plr.Character.HumanoidRootPart
+
+mouse = plr:GetMouse()
 
 
-,nil,nil;(function() _msec=(function(e,B,l)local G=B[(26+-#{(function()return{','}end)();19,'nil',19;'nil','nil';'nil'})];local J=l[e[((104580/0x8c)+-#[[how to find my dad at the dollar store getting milk]])]][e[(-#"impulse loves moonsex"+(-0x34+(144996/0xac)))]];local k=((136-0x76)+-#"dies of cringe")/(103-((21560/0x58)-0x90))local a=((((165+-0x45)+-#"impulse is hot")-60)/0xb)-(-#[[free pornhub premium]]+(0x79-100))local D=l[e[(430-0x107)]][e[(-60+(-#'balls'+(0x1a54/20)))]];local H=(((-#[[Nsrds GAYYYYAIAHAKAJAVAHAUA]]+(0x79+((-0x78/15)+-#"Obfuscated By Obamas Left Nut")))-0x30)+-#[[lego hax]])+((0x4e6/57)+-#[[Cock and ball tortue]])local S=l[e[(42198/0x4e)]][e[(858+-0x24)]]local d=((1134/0x36)+-#"how to join the kkk")-(140/(-#"freerobuxphone"+((418-0xec)+-28)))local U=(((952+(-0xe-((0x2bea/146)+-#"i shoved a whole bag of jellibeans up my ass")))+-#"0nly 1337")/0xe0)local N=(((-72+(20382/0x2b))-0xfa)/38)local v=(57-(-#"real roblox omg builderman caught playing real"+((640-((-#{(function()return#{('kOooBk'):find("\111")}>0 and 1 or 0 end);{},",",{}}+51548)/0x88))-0xa2)))local C=(-#[[Obfuscated By Obamas Left Nut]]+(-0x74+(((-458/0xe5)-52)+203)))local _=(-33+(-#[[windows xp startup sfx]]+((166+(((0x58-63)+-#'waste of sperm')-62))+-0x38)))local M=(-#{1,(function()return#{('BflBff'):find("\108")}>0 and 1 or 0 end),",";(function()return{','}end)(),1;","}+10)local f=(9+-#{(function()return#{('KKhFhm'):find("\104")}>0 and 1 or 0 end),(function()return{','}end)(),",",{},(function()return#{('KKhFhm'):find("\104")}>0 and 1 or 0 end),'}'})local L=((0x6d-((0x131-(((0x278-(-#{'nil',95,(function()return{','}end)();(function()return{','}end)()}+355))+-#[[Nsrds GAYYYYAIAHAKAJAVAHAUA]])+-60))+-#"atakan der nigga"))+-#"nicowashere")local c=((0x55-(218-((-#"i shoved a whole bag of jellibeans up my ass"+(12187+-0x62))/0x49)))+-#"Only a to Z 0 to 9 is allowed")local K=((-#'MoonsecV2 deobfuscator 2020 free 100 percent'+(-4429/((226+-#{'}';(function()return{','}end)();1;'}'})+-119)))+90)local O=(-#"If no milk then return ffather"+(0x68-(-#'Only a to Z 0 to 9 is allowed'+((-#{35,35,114;(function()return#{('fbfBBP'):find("\102")}>0 and 1 or 0 end),'nil','nil'}+244)-0x8a))))local x=(-#"mama mo"+(1480/((-#"Me be like at 5am in the morning"+(545-(673-0x170)))+-0x3c)))local m=((((-58/(249/(-20+0x10d)))+-#'monkey mode')+0x4e)+-#"Ã‘Ã‘Ã‘Ã‘Ã‘Ã‘Ã‘")local h=(-#{(function()return#{('BFmMmF'):find("\109")}>0 and 1 or 0 end);'}';1,(function()return{','}end)(),1,'}'}+8)local p=(0x9e/((-#'Luraph v13 has been released changed absolutely fucking nothing'+(160-(3834/0x1b)))+0x7c))local i=(((-#{1;'}','}','}','nil';1}+143)-108)+-#"goofy ahh uncle productions")local F=((0xa2-((10260/(0x23dc/((0x9450/226)+-#[[psx dupe is abd]])))+-#"Me be like at 5am in the morning"))+-#'this is a meme string')local b=((543+((-#'Bwomp'+(-805661/(0x892f/203)))/42))/0xd8)local I=e[(2713-0x576)];local j=l[e[(0x2488/56)]][e[(-#[[impulse is hot]]+(1068-0x230))]];local Y=l[(function(B)return type(B):sub(1,1)..'\101\116'end)('oMhhHpkP')..'\109\101'..('\116\97'or'FMkLLmKM')..e[(0x476-601)]];local t=l[e[(0x234+-23)]][e[(1897-0x3cc)]];local w=(-#'Impulse youtube ez'+(145+-0x7d))-(((-#[[da hood money generator 2022 working free no virus]]+(((0x9e3c-20303)+-#[[Obfuscated By Obamas Left Nut]])/194))-44)+-#[[lego hax]])local s=((-#'atakan der nigga'+((0x305-419)-219))+-117)-(0x44+-66)local A=l[e[((0x2a1c/55)+-#"Fucking losed 027728272728271")]][e[(0x360-495)]];local B=function(e,B)return e..B end local g=((-36+0x31)+-#'0nly 1337')*(((((0xcb280/66)+-#"i bought a boost for this string")/0x83)+-75)+-#"alivephoneluaLMAO")local z=l[e[(-#'impulse reel pastebin'+(2462-0x50e))]];local r=(59-0x39)*(-#'da hood money generator 2022 working free no virus'+((-0x34+(117369/0xf3))-253))local y=(-#[[fatee is gay 0nly on top]]+(-0x13+1067))*(46/((-64+0x8b2)/94))local V=(-#'elbicho'+(0x19d/(((12175-(12343-0x184c))/178)+-#[[goofy ahh uncle productions]])))local P=(-#[[good googly moogly]]+((-20203/(((-#'sex in fortnite real'+(0xdec/6))-0x12d)+-#"real roblox omg builderman caught playing real"))+0x6d))*(50+-0x30)local u=l[e[(2231-0x49a)]]or l[e[(1160-0x26b)]][e[(2231-0x49a)]];local n=((((-0x18cf/73)+457)+-110)+-#'null')local e=l[e[((0xa68-1375)+-#[[nerd]])]];local S=(function(n)local r,l=1,0x10 local e={j={},v={}}local o=-d local B=l+a while true do e[n:sub(B,(function()B=r+B return B-a end)())]=(function()o=o+d return o end)()if o==(g-d)then o=""l=w break end end local o=#n while B<o+a do e.v[l]=n:sub(B,(function()B=r+B return B-a end)())l=l+d if l%k==w then l=s t(e.j,(A((e[e.v[s]]*g)+e[e.v[d]])))end end return S(e.j)end)("..:::MoonSec::..bBfFlLkKoOpPhHmMHBhFPBpBOBolKBkBLBlBFOfBBBbBMFmBHBhBPBBBOBoBKBkBLBlBfBkbBfbBMBmBHBhBPBBBHBoFKLkBLBlBOloOKfKFoKmLHBhBPBbFbpMLHkooLHlBFBfBKLLfLhLBFPbPBPmHMkhPhPPFOHlKFBfBBBKlkLLFFpfMBoLhOloBKBkBhlPkOFlFBBbBMBMFbBhBPlpBOKoBKBkBLBkBFBflBBblMBmfHBhKmFpBOloBKkkBLflBFffBBLFHMBmBHBhkPBpfOBoLpHkBLBlBFOfBBfbBbFBBHBhlPBpKOBoBKBkBKBlBFlfBBlbBMfmBHBhLPBplOBoFKBkBLBLFKLfBBlbBMFmBHBhBhFPPOBoLKBkfLBlBFBFFBBbBMkmBHFhBPBpBOBoBKBkKLBlBFBfBBBBFMBmBHohBPFpBOBoBKLkBLBlkFBFMBBbfMBmBHphBPppBOLoBKBkBkFLOFBfPBBboMBmBHBmBPBpBOPoBKPkBLLlBLBfBBBbhMBmBHBhOPBpBOBoBKmkBLOlBFBfBBBbBMBmMHBhOPBpBOBoBKBkBLhlBFMfBBFbBBBmBHBhhPBphOBokKBkBLBlBFhfBBFbBMFmBHBhBPBphOBohKBklLBkBFBfBBhbBMhmBHlhBPBpBOBoPKBkFLBlFFBfBBBbBMLmBHphBPPpBOBoBKBkpLBllFBfFBBfBMBmBHlhBPppBOloBKLoFLBlkFBfMBBbfMBMFbBhBPkpBOKoBKBkBLBoBFBfkBBbfMBmLHBhBPLpBOLoBKFkBLBlBFBFmBBbBMBmfHBhBPBpFOfoBKBkBLBlBFBfBBBbBMBmBHBhoPBpBOBoBopkBLBlBFffBBBbBMBmBHBhBPBpBOBoBKBkBLBlBFBfBBBbBMBmBHBhBPBpBOBolKBkBLBlBFBfBBBbBMBmBHBhBPBpBOBoBKBkFLBlBFBfBBBbBMBmBHfhBPBpBOFoBKBkBbhlkFBfBBBKBLllfFHfHkPpBOBoBKBkBLBlBFBFmBBbBMBMFBLhBPFpBOFoBKBkBkFoLFBflBBbFMBmBHBHFmBpBOLoBKfkBLBlBFKkpBBbkMBmBHBhfPBpLOBoBObkBLBlBFFfBBBbBMBbbHBhBPBpBOBoBKBkBKblBFBfBBlbBMBmBHBmbPBpBOBofKBkBLBlBLMfBBLbBMFmBHfhBPKHMOBoBKBKpLBlfFBffBBbLfHmBHBhBhppBOfoBKKKlLBlBFBfMBBbfMBmfHBhLmHpBOBoBKMkBLflBFLLHBBbBMBMpHBhfPBpKploBKfkBkflBFffBBBbBMLBHHBhBPBPfOBofKBkLoHlBFBfBfpbBMfmBHBMKPBpLOBoFKBklLBlBkKfBBkbBMlmBHFhBPKHMOBoLKBKpLBlfFBfkBBbLfHmBHBhBhppBOfoBKBOKLBlLFBfFBBblMBmBbKhBPkpBOloBKFkBLKLlFBfLBBBPMBmfHBhkPBpLhHoBKBkBkPlBFffBBBfLMBmLHBhBPBpBOBoBOmkBLLlBFffBBBbBMBmLHBhLPBpFOBoBKBkBkmlBFBfBBfbBMBmBFbhBPBpBHHoKKBkBLBOFOkomobKLLkLfHkhBPBpBHlmOHkHlhLkoFkfBBBbBlkfLFpfmmFoBOPoBKBkBOhppOlohkBkHLfLpFkFFOBpoOBoBKBpOhLPLpBkoKkKLphmLHBhBPBboMfmmHkkFLHlBFBfBKLLfLhLBFPbPBPmHMkhPhPPFmKlOFBfBBBlFkblLlpbofpBFbbMfKpkBLBlBKmofKokMLpLLlkfLBkpFOPoBKBkBPbpbplokKlKkkFlkFkFfHopLOBoBKBhoPfpmOkfFBobBMBmBBlFbfFbkHoMkHpMKLolBFBfBKKKFkblmfFboMFFKOKoBKBkBpBpHOfOpKkKFHBmhHBhBPBmHbbmlHfhHpBpHOfOpKkKFHBmOHBhBPBMlMkMLhlhlhbPFOkbBBobBMBmBFLfpflblbbMFHLBhkflBFBfBkFkkkBlHFpflBfBLMkmLhlHLhbPFOfooKkKfMKmBHBhBMmBbMMmhHkHpbhlpFBfBBBKoLklFFOFbfbbhHphLOokHLBlBFBkfKLkLFkLOlLFFBfmlMfMlHOMKLHlBFBfBkLKFLploFofkfFmkbKmkHMHLFBlOFBfBBBlOkLLLlBBBfbBlbLMfKhkBLBlBKHokKfkLLkLFFFFbBfBFMLoFKpkBLBlBOoofKmkkkllkFMFlBkpFOkoBKBkBOOPbOMokopOKMmmBHBhBBfBBMpPbmohkPFpOpbObKhKlfbLfHohBPBpBmKmkHlHLhbPFkllofObBMBmBlBffflBLMkmFHphMKMplpbomlbKFLfLobbFkMhHlhohKHPpkmKlKFBfBBBKlLOlfFLFbfopFOkoBKBkBpFppOooOoLPhMPmBHBhBMobkbLHlHkHFhKppOlokpKbMMBmBHBbMBkBobLMbHMHlhbpKpLkPklLbFMmFmbhBPBpBMLMlHKoBPpPlLBoOKfKFLmlHFkFlflmHOPoBKBkBplPkpFoKKfklLkfolkfpOBpMOBoBKBhoPfpmOkOlKkkMkllkbbfOfLBLbBMfKkkBLBlBKmObKMkkkpKKHOhBPBpBMLhKmFPlOOoFpBKBFoboMBmBHBbOfLBLbBhoHkHLbhkfFBfBBBkoLoFhBhbFpmoKkPObkLLPlbBLMkmBhpkmoKKKLOMMfkMOMFoMKkkPkHlKBpmPMmhKkfmkHBhBPBmKbbMFHlhkLFlLFBfBBBKBLfLFlLFfPlpBOBoBHMhkhoHKFkfBBBbBFllHlbFoBMBfOhoBKBkBPlpOOkolKhklLflHFHfkfFpFOloBKBkBOHpkOobBBKbBMBmBPBLohmKpbhmLmfkPLBlBFBkPolKbLMfLFkflfbbLMkoFKlkBLBlBKfKBLpOKMLmBHBhBMObkMfmLPHkpLBlBFBKBKHkfkplklFbofkbpfKoOKBkBLBopOMOloLkfLMllFkbHPOpBOBoBHFhphLkMOFOOobKFHBmpHBhBPBblMOmfmFhfPlPLOkOFofbhMBmBHBbfBLbmMpmMhFhkPmPbpLokhhbPMBmBHBfpflbHMlmHmbHlhkPFOkOfBObBMBmBBOFkBmbfMMMbHphLmKlLFBfBBBkoLflmFkpBPlpBOBoBPohkhLfBFpfBBBbBloLblFfhflBBMfmlHkooLolBFBfBLlkpkLlplPfkBMBfOHoBKBkBOppMpKObKhkklllklFFKBkBFbfoPKBkBLBpHpbofKLKlkLLFFpfMBoLhOpoBKBkBhopfOHoholKBLklkFLpBhbpBOBoBPfhLPLokpKokKMKLFOlfFMfLBHbkbFhHKOkBLBlBKFObKLKpFoLplFFbMHpFOBoBKBHbhlPflkfBBBbBLLlpllflfbBFMLpMHohoobpoofkkLOFFkkFPlOBkBhhoOLoBKBkBhLppOmokBFbKMBmBHBFOfBblMfmHHHpHLOlBFBfBklklkFlkFMbofkbpPoohKBkBLBolOpOLKpKPLklMllfOBpBBbfopKBkBLBoFpboLoplKkbLFFlfkkhplOBoBKBhfhBppLoFBBBbBMBfOlkfmBfbMbbmpHLPFhbPbpLKBKfKFkLboHLhBPBpBHHmkHKHLLFlfFBfBBBkbFHmLHBhBPBmlMfMlHOkFLLlBFBfBLOkkLflLHFhkPBpBOBHlHlHbhFpkLofoBBbBMBlOlLFLfBHPhbPbKFkpLBlBFBklKOkfkFlfFlFLBkBFbfoPKBkBLBoKOpOFKkLlLkLFlKfkfFFKOloBKBkBOkOloBkHBObBMBmBBlffBHbHMFmfHlhhhflLFBfBBBlPklLbFMFfPppBOBoBmoHbhFphplOBKfklLkKKHhhBPBpBMHmkHfhLPkPFplOLKfKLklLfHLhBPBpBHOmkHfhLmKlKFBfBBBlfLmLblkfMfLmhOBoBKBkBLBlBLOkBMBbpMBmBHBbFfbbLbphKmbHFPlpkmhfpBBbBMBFoFffHBhBlbBmkHkhLOHlLFBfBBBLBLfLFlLFfhLpBOBoBhlhkhLOBpFopKmkfkFLpfBfffFBLHlhKmFhfPmpklofBBBbBMFbHHBhBPBpfOBoBKBKFkKlBFBfBBPbBMBmBHBhBPBpBOBoBKBkBLBlBFBfBBfbBMBmBHBhBhFpBOBofKBkoLBlBFBFFBBbBMfmBBmhBPBpBPKoBKBkfLBlpFBffBBlLMBmLbHhBPBpBOpoBKfkBLBLmFBfBBBbfMBmBHBhFHHpBOfoBKBkBLBlBlFfFBBbfMBbKHBhBPBPFOBoBKfkBOblBFBfBfFbBMBmFHBMPPBpBOBpBKBkBLFlBFFfBFobBbFmBHBhLPBhKOBoBKBKFLBlBFkfBFObBMBmBmFhBPBpKOBPbKBkBLBLFFBfBBobBlhmBHBhBPBpBOBoLKBkoLBlFFBfBBBbBMFmBHLhBPBpBOBhfKBkfLBlBFBfFBBbBbMmBHfhBPfpBOfoBKBKmLBlBFBffBBbBMB");local t=(19+-#{'}';1;{}})local l=47 local o=d;local e={}e={[(23-0x16)]=function()local a,d,B,e=D(S,o,o+H);o=o+P;l=(l+(t*P))%n;return(((e+l-(t)+r*(P*k))%r)*((k*y)^k))+(((B+l-(t*k)+r*(k^H))%n)*(r*n))+(((d+l-(t*H)+y)%n)*r)+((a+l-(t*P)+y)%n);end,[(0x1ec/246)]=function(B,B,B)local B=D(S,o,o);o=o+a;l=(l+(t))%n;return((B+l-(t)+y)%r);end,[((21/0x3)+-#"yeet")]=function()local e,B=D(S,o,o+k);l=(l+(t*k))%n;o=o+k;return(((B+l-(t)+r*(k*P))%r)*n)+((e+l-(t*k)+n*(k^H))%r);end,[(-#"how to find my dad at the dollar store getting milk"+(210-0x9b))]=function(l,B,e)if e then local B=(l/k^(B-d))%k^((e-a)-(B-d)+a);return B-B%d;else local B=k^(B-a);return(l%(B+B)>=B)and d or s;end;end,[(0x58-83)]=function()local l=e[(0x6c/(-44+0x98))]();local B=e[(-#[[Obfuscated By Obamas Left Nut]]+(0xb3-149))]();local f=d;local o=(e[((154-0x56)/0x11)](B,a,g+P)*(k^(g*k)))+l;local l=e[(-0x4d+81)](B,21,31);local B=((-d)^e[(-#[[Niggabyte]]+(0x63+-86))](B,32));if(l==s)then if(o==w)then return B*s;else l=a;f=w;end;elseif(l==(r*(k^H))-a)then return(o==s)and(B*(a/w))or(B*(s/w));end;return J(B,l-((n*(P))-d))*(f+(o/(k^V)));end,[((1248/(-#"10 black dicks in your mouth"+(0x35bc/181)))+-#"Impulse youtube real")]=function(B,k,k)local k;if(not B)then B=e[(131/0x83)]();if(B==s)then return'';end;end;k=j(S,o,o+B-d);o=o+B;local B=''for e=a,#k do B=I(B,A((D(j(k,e,e))+l)%n))l=(l+t)%r end return B;end}local function y(...)return{...},z('#',...)end local function S()local i={};local o={};local B={};local x={i,o,nil,B};local l={}local F=(190-0x92)local n={[(0x39+-57)]=(function(B)return not(#B==e[(59-0x39)]())end),[(238/0xee)]=(function(B)return e[(1035/0xcf)]()end),[(-35+0x25)]=(function(B)return e[(0x63+-93)]()end),[(-#[[Cock and ball tortue]]+((443003/0x67)/187))]=(function(B)local l=e[(95-(8900/0x64))]()local e=''local B=1 for o=1,#l do B=(B+F)%n e=I(e,A((D(l:sub(o,o))+B)%r))end return e end)};x[3]=e[((0x168/36)+-#"Gay porn")]();for B=a,e[(0x6a-105)]()do o[B-a]=S();end;local B=e[(0xda/218)]()for o=1,B do local B=e[(-#"zykem krul"+(2088/0xae))]();local e;local B=n[B%(-#[[Fucking Retarted]]+((0x15f-212)-0x56))];l[o]=B and B({});end;for r=1,e[(18+((0x41-75)+-#"niggers"))]()do local B=e[(386/0xc1)]();if(e[(320/0x50)](B,d,a)==w)then local n=e[(130-(0x12d-175))](B,k,H);local o=e[(102+-0x62)](B,P,k+P);local B={e[(186/0x3e)](),e[((111+-0x59)+-#"made by kim jong un")](),nil,nil};local f={[(39-0x27)]=function()B[O]=e[(-#'alivephoneluaLMAO'+(3440/0xac))]();B[_]=e[(-#"impulse loves moonsex"+((0x24ab-4707)/0xc3))]();end,[(87+-0x56)]=function()B[c]=e[(-0x55+(0x87+-49))]();end,[(-#"Big black men"+(2205/(0xbd+-42)))]=function()B[f]=e[(40+-0x27)]()-(k^g)end,[(399/0x85)]=function()B[f]=e[(0x4a-73)]()-(k^g)B[M]=e[(0x36+-51)]();end};f[n]();if(e[(124+-0x78)](o,a,d)==a)then B[b]=l[B[h]]end if(e[(38+-0x22)](o,k,k)==d)then B[L]=l[B[L]]end if(e[(0x52-(-22+0x64))](o,H,H)==a)then B[N]=l[B[U]]end i[r]=B;end end;return x;end;local function s(e,P,t)local o=e[k];local g=e[H];local l=e[d];return(function(...)local D=y local n=z('#',...)-a;local e=d e*=-1 local H=e;local r=l;local S={...};local w=o;local l={};local o=d;local y={};local e=g;local g={};for B=0,n do if(B>=e)then y[B-e]=S[B+a];else l[B]=S[B+d];end;end;local e=n-e+d local e;local n;while true do e=r[o];n=e[((5181/0x9d)+-#[[Me be like at 5am in the morning]])];B=(5723150)while(0xc0-156)>=n do B-= B B=(1014244)while n<=(108+-0x5b)do B-= B B=(5845905)while(1296/0xa2)>=n do B-= B B=(8054856)while n<=(124+-0x79)do B-= B B=(607662)while(-0x4f+((0x10f-184)+-#"elbicho"))>=n do B-= B B=(520856)while(0x0/83)<n do B-= B local B=e[p];local n=l[B]local d=l[B+2];if(d>0)then if(n>l[B+1])then o=e[c];else l[B+3]=n;end elseif(n<l[B+1])then o=e[x];else l[B+3]=n;end break end while 1048==(B)/((0x206+-21))do if not l[e[p]]then o=o+a;else o=e[c];end;break end;break;end while 726==(B)/((-0x35+890))do B=(12746857)while n>(0x1c0/224)do B-= B l[e[i]]=(e[c]~=0);o=o+a;break end while 3499==(B)/((7314-(0x1cc7-3696)))do local n;local M,k;local a;local B;t[e[x]]=l[e[h]];o=o+d;e=r[o];l[e[m]]=t[e[O]];o=o+d;e=r[o];l[e[p]]=t[e[c]];o=o+d;e=r[o];B=e[i];a=l[e[O]];l[B+1]=a;l[B]=a[e[v]];o=o+d;e=r[o];l[e[b]]=t[e[L]];o=o+d;e=r[o];l[e[F]]=e[c];o=o+d;e=r[o];l[e[b]]=e[f];o=o+d;e=r[o];l[e[b]]=e[x];o=o+d;e=r[o];B=e[b]l[B]=l[B](u(l,B+d,e[O]))o=o+d;e=r[o];B=e[p]M,k=D(l[B](u(l,B+1,e[f])))H=k+B-1 n=0;for B=B,H do n=n+d;l[B]=M[n];end;break end;break;end break;end while 2514==(B)/((0x35310/68))do B=(1922291)while n<=(-0x43+72)do B-= B B=(4516239)while n>(328/0x52)do B-= B local B=e[m];local o=l[e[L]];l[B+1]=o;l[B]=o[e[M]];break end while(B)/((3306-0x68b))==2769 do do return l[e[p]]end break end;break;end while(B)/((0x116b-2282))==883 do B=(78372)while(122-0x74)>=n do B-= B local k=w[e[x]];local d;local B={};d=Y({},{__index=function(l,e)local B=B[e];return B[1][B[2]];end,__newindex=function(o,l,e)local B=B[l]B[1][B[2]]=e;end;});for n=1,e[N]do o=o+a;local e=r[o];if e[(0x9a/154)]==31 then B[n-1]={l,e[L]};else B[n-1]={P,e[f]};end;g[#g+1]=B;end;l[e[F]]=s(k,d,t);break;end while(B)/((4284/0xcc))==3732 do B=(1090522)while(0x7f-120)<n do B-= B l[e[p]]=e[c];break end while(B)/(((0x1b6f-3542)+-#'lego hax'))==314 do l[e[b]][l[e[c]]]=l[e[_]];break end;break;end break;end break;end break;end while 1755==(B)/((6710-0xd33))do B=(1084160)while(0x53-71)>=n do B-= B B=(7313790)while n<=(-#'niggers'+(0x5d-76))do B-= B B=(13547)while n>((-75+0x7a)+-38)do B-= B do return end;break end while 31==(B)/((0x3a6-497))do l[e[m]]=l[e[O]];break end;break;end while(B)/((-0x17+3018))==2442 do B=(6822090)while(0x60-85)<n do B-= B do return l[e[m]]end break end while(B)/((-#[[impulse loves moonsex]]+(-125+0x98b)))==2970 do l[e[p]]=l[e[L]][e[C]];break end;break;end break;end while 1408==(B)/(((-0x30+828)+-#[[paidlancer]]))do B=(4724075)while(0x738/132)>=n do B-= B B=(1197070)while(72-0x3b)<n do B-= B if(l[e[b]]~=e[C])then o=o+a;else o=e[x];end;break end while(B)/((87465/0x33))==698 do if(l[e[F]]~=l[e[C]])then o=o+a;else o=e[c];end;break end;break;end while 1165==(B)/(((0x3bb50/60)+-#'this is a meme string'))do B=(1846704)while n<=(0xe97/(0x8e02/146))do B-= B local B=e[m]l[B]=l[B](l[B+a])break;end while(B)/((17064/0x9))==974 do B=(1850224)while n>((0x67-82)+-#'false')do B-= B local B=e[i]l[B]=l[B](u(l,B+d,e[L]))break end while 3152==(B)/((1275-0x2b0))do P[e[x]]=l[e[F]];break end;break;end break;end break;end break;end break;end while(B)/(((0x32e-437)+-#[[impulse reel pastebin]]))==2849 do B=(2941120)while(-#[[use luraph if want lost money]]+(161-0x6a))>=n do B-= B B=(10831744)while n<=(((0x1305+-25)/173)+-#'mama mo')do B-= B B=(7984050)while(0x2b+-24)>=n do B-= B B=(3906668)while(0xd6e/191)<n do B-= B if(l[e[F]]~=l[e[_]])then o=o+a;else o=e[O];end;break end while 3148==(B)/((-79+0x528))do l[e[b]]=s(w[e[f]],nil,t);break end;break;end while 2325==(B)/((-103+0xdd1))do B=(9757299)while n>(82+-0x3e)do B-= B local B=e[p]local o,e=D(l[B](u(l,B+1,e[f])))H=e+B-1 local e=0;for B=B,H do e=e+d;l[B]=o[e];end;break end while(B)/((0x1704-2961))==3329 do local B=e[m]l[B]=l[B](l[B+a])break end;break;end break;end while 3454==(B)/(((0x88350/((0x1dc-279)+-#'go kys go kys go kys'))+-#'atakan der nigga'))do B=(446964)while(-99+0x7a)>=n do B-= B B=(5046681)while n>(-108+0x82)do B-= B if(l[e[b]]==l[e[M]])then o=o+a;else o=e[c];end;break end while(B)/((-#"niggers"+(7015-0xddd)))==1459 do t[e[f]]=l[e[F]];o=o+d;e=r[o];l[e[p]]={};o=o+d;e=r[o];l[e[b]]={};o=o+d;e=r[o];t[e[f]]=l[e[i]];o=o+d;e=r[o];l[e[i]]=t[e[x]];o=o+d;e=r[o];if(l[e[F]]~=e[U])then o=o+a;else o=e[f];end;break end;break;end while 119==(B)/(((765513/0xcb)+-#"Russian letters"))do B=(1396448)while(0x1530/226)>=n do B-= B local P;local n;local K;local B;l[e[b]]=t[e[c]];o=o+d;e=r[o];l[e[h]]=l[e[f]][e[N]];o=o+d;e=r[o];B=e[h];K=l[e[x]];l[B+1]=K;l[B]=K[e[M]];o=o+d;e=r[o];l[e[b]]=l[e[f]];o=o+d;e=r[o];l[e[p]]=l[e[c]];o=o+d;e=r[o];B=e[h]l[B]=l[B](u(l,B+d,e[x]))o=o+d;e=r[o];B=e[h];K=l[e[O]];l[B+1]=K;l[B]=K[e[U]];o=o+d;e=r[o];B=e[p]l[B]=l[B](l[B+a])o=o+d;e=r[o];n={l,e};n[a][n[k][h]]=n[d][n[k][M]]+n[a][n[k][L]];o=o+d;e=r[o];l[e[i]]=l[e[L]]%e[C];o=o+d;e=r[o];B=e[h]l[B]=l[B](l[B+a])o=o+d;e=r[o];K=e[O];P=l[K]for B=K+1,e[M]do P=P..l[B];end;l[e[F]]=P;o=o+d;e=r[o];n={l,e};n[a][n[k][p]]=n[d][n[k][_]]+n[a][n[k][x]];o=o+d;e=r[o];l[e[m]]=l[e[c]]%e[M];break;end while(B)/((-#[[nate higger nuck figgers and nill kiggers]]+(2482+-0x19)))==578 do B=(9674112)while(-91+0x74)<n do B-= B local a;local n;local B;l[e[p]]=e[L];o=o+d;e=r[o];l[e[b]]=e[x];o=o+d;e=r[o];l[e[h]]=#l[e[O]];o=o+d;e=r[o];l[e[h]]=e[x];o=o+d;e=r[o];B=e[i];n=l[B]a=l[B+2];if(a>0)then if(n>l[B+1])then o=e[K];else l[B+3]=n;end elseif(n<l[B+1])then o=e[O];else l[B+3]=n;end break end while 3904==(B)/((0x13b1-2563))do l[e[h]]=P[e[O]];o=o+d;e=r[o];l[e[i]]=#l[e[c]];o=o+d;e=r[o];P[e[K]]=l[e[m]];o=o+d;e=r[o];l[e[m]]=P[e[L]];o=o+d;e=r[o];l[e[F]]=#l[e[f]];o=o+d;e=r[o];P[e[K]]=l[e[m]];o=o+d;e=r[o];do return end;break end;break;end break;end break;end break;end while 2828==(B)/((-#"FranzJPresents"+(1177+-0x7b)))do B=(12290634)while n<=((-0x48+151)+-#[[never gonna give you up never gonna let you down]])do B-= B B=(7222960)while(-72+0x64)>=n do B-= B B=(5761845)while((-8556/0x7c)+96)<n do B-= B l[e[F]]=#l[e[x]];break end while 1465==(B)/((0x18015/25))do l[e[i]]=P[e[O]];break end;break;end while(B)/((-#'Crackzzzz'+(0x1e5d9/33)))==1921 do B=(8210454)while n<=(167-0x8a)do B-= B do return end;break;end while 2517==(B)/((6623-0xd21))do B=(6760830)while n>(2130/0x47)do B-= B l[e[h]]=l[e[f]];break end while(B)/((0x605c7/147))==2518 do l[e[b]]();break end;break;end break;end break;end while(B)/((0x187a-3167))==3966 do B=(113506)while n<=(1617/0x31)do B-= B B=(5572260)while n>(96-0x40)do B-= B l[e[i]]={};break end while 2428==(B)/(((-89+0x7ea67)/0xe2))do l[e[i]]=l[e[L]][l[e[M]]];break end;break;end while 1957==(B)/((-#[[if syn then haxor alert end]]+(207+-0x7a)))do B=(580144)while(((22270/0x83)+-#"arab porn")+-127)>=n do B-= B local B=e[p];local d=l[B+2];local n=l[B]+d;l[B]=n;if(d>0)then if(n<=l[B+1])then o=e[c];l[B+3]=n;end elseif(n>=l[B+1])then o=e[x];l[B+3]=n;end break;end while(B)/((411+-0x34))==1616 do B=(13136900)while((213-0x7f)+-#'how to find my dad at the dollar store getting milk')<n do B-= B l[e[F]]=(e[L]~=0);o=o+a;break end while(B)/((0x1b14-3502))==3830 do l[e[h]]=l[e[c]][l[e[U]]];break end;break;end break;end break;end break;end break;end break;end while 1450==(B)/((0x1f0e-4003))do B=(12682138)while(12636/0xea)>=n do B-= B B=(2725681)while n<=(-#[[0 divided by 0]]+(182-0x7b))do B-= B B=(1542764)while n<=(0xac-132)do B-= B B=(5053905)while n<=(0x1be8/188)do B-= B B=(1721486)while(0x32e/22)<n do B-= B l[e[i]]=(e[L]~=0);break end while 949==(B)/((-#"0nly 1337 smashed ur wap"+(406198/0xdd)))do local B=e[i];local d=l[B+2];local n=l[B]+d;l[B]=n;if(d>0)then if(n<=l[B+1])then o=e[O];l[B+3]=n;end elseif(n>=l[B+1])then o=e[K];l[B+3]=n;end break end;break;end while 1285==(B)/((-#"deadphonelua"+(737715/0xbb)))do B=(4457514)while n>(122+(-54-0x1d))do B-= B l[e[i]]=l[e[K]][e[U]];break end while(B)/(((0x3e085/195)+-#"impulse reel pastebin"))==3477 do l[e[i]]=l[e[f]]%e[M];break end;break;end break;end while 859==(B)/(((0x74c+-57)+-#[[W4rboy was here]]))do B=(7371945)while n<=(114-0x48)do B-= B B=(4823744)while((-48+0x6c)+-#"made by kim jong un")<n do B-= B l[e[h]]=#l[e[f]];break end while(B)/(((1394+-0x2a)+-#"free bobux no skem"))==3616 do o=e[O];break end;break;end while(B)/((0x1365-2544))==3045 do B=(175056)while n<=(344/0x8)do B-= B local B=e[b]l[B](l[B+a])break;end while(B)/((0xff8/73))==3126 do B=(3040280)while n>(-#[[big niggers sucking cock]]+(10132/0x95))do B-= B l[e[h]]=(e[f]~=0);break end while(B)/((2175-(64011/0x39)))==2890 do l[e[h]]=s(w[e[O]],nil,t);break end;break;end break;end break;end break;end while 841==(B)/((-0x58+3329))do B=(639529)while(((12104+-0x40)/172)+-#[[impulse reel pastebin]])>=n do B-= B B=(6823440)while(167-0x78)>=n do B-= B B=(13932)while n>(149-0x67)do B-= B local B=e[b];local n=l[B]local d=l[B+2];if(d>0)then if(n>l[B+1])then o=e[L];else l[B+3]=n;end elseif(n<l[B+1])then o=e[L];else l[B+3]=n;end break end while(B)/((-#'impulse was here pastebin reel'+(810-0x1c8)))==43 do local B=e[i]l[B](l[B+a])break end;break;end while(B)/((6436-0xccd))==2160 do B=(4186720)while n>(-0x5a+(4416/0x20))do B-= B l[e[p]]=l[e[x]]-l[e[N]];break end while 1910==(B)/((0x8a6+-22))do l[e[h]]=t[e[f]];break end;break;end break;end while 1237==(B)/((-84+0x259))do B=(2673363)while n<=(-#[[real roblox omg builderman caught playing real]]+(0x83+-34))do B-= B B=(1706580)while(8450/0xa9)<n do B-= B local B={l,e};B[a][B[k][F]]=B[d][B[k][N]]+B[a][B[k][x]];break end while(B)/((-#'MSC 793z487nhvcgsdfgsudfza9889jgvz56gz56z547684z5g54z948g56z74j56475jzg645z6456 oh wait bitch'+(55648/0x5e)))==3420 do if not l[e[b]]then o=o+a;else o=e[f];end;break end;break;end while(B)/((-#[[0nly segc]]+(0x62df0/118)))==781 do B=(1224636)while n<=(0x9f+-107)do B-= B local B=e[F]l[B]=l[B](u(l,B+d,e[K]))break;end while 717==(B)/(((3563-0x72b)+-#"Cock and ball tortue"))do B=(2512620)while((0x3782/245)+-#"Bwomp")<n do B-= B l[e[h]]=l[e[f]]-l[e[M]];break end while 972==(B)/((-0x11+2602))do local B=e[F]local o,e=D(l[B](u(l,B+1,e[f])))H=e+B-1 local e=0;for B=B,H do e=e+d;l[B]=o[e];end;break end;break;end break;end break;end break;end break;end while 3218==(B)/((0xa29ad/169))do B=(14671667)while(0xb8-121)>=n do B-= B B=(9247860)while n<=(0x54+(-0x1e+4))do B-= B B=(2967201)while n<=(146+-0x5a)do B-= B B=(11521761)while(0xe6-175)<n do B-= B t[e[K]]=l[e[i]];break end while(B)/(((-#[[testing this thingy lololollez]]+(1323564/0xde))-3001))==3931 do l[e[b]]=P[e[L]];break end;break;end while 1317==(B)/(((364987/0xa1)+-#"impulse is hot"))do B=(2768832)while n>(-#[[keno 0347 is a nerdy fag]]+(6156/0x4c))do B-= B l[e[b]]();break end while(B)/((-0x57+2709))==1056 do l[e[b]]={};break end;break;end break;end while 3095==(B)/((-#"impulse was here omg"+(0x17ae-3054)))do B=(1381807)while((-85+0xaf)+-#"testing this thingy lololollez")>=n do B-= B B=(1928592)while n>(12803/0xd9)do B-= B o=e[f];break end while(B)/((-35+0x236))==3632 do local B=e[b]l[B]=l[B](u(l,B+d,H))break end;break;end while 643==(B)/((212751/0x63))do B=(2205000)while n<=(-#"impulse is hot"+(0xd5-138))do B-= B local B=e[h];local o=l[e[f]];l[B+1]=o;l[B]=o[e[M]];break;end while(B)/((136500/0xb6))==2940 do B=(2125466)while((12875/0x67)+-#"Luraph v13 has been released changed absolutely fucking nothing")<n do B-= B l[e[m]]=l[e[O]]%e[U];break end while 2198==(B)/(((-0x3c+1047)+-#[[free pornhub premium]]))do if(l[e[h]]==l[e[_]])then o=o+a;else o=e[c];end;break end;break;end break;end break;end break;end while(B)/((-#"nicowashere"+(77238/0x15)))==4001 do B=(114348)while(-92+0xa0)>=n do B-= B B=(2841510)while((242-0xa1)+-#"0nly was here mf")>=n do B-= B B=(7065324)while n>(-#"sex in fortnite real"+(-86+0xaa))do B-= B local B=e[b]l[B]=l[B](u(l,B+d,H))break end while(B)/((7483-0xec4))==1908 do l[e[i]][l[e[c]]]=l[e[C]];break end;break;end while(B)/((-18+0x79f))==1470 do B=(5529786)while(126+-0x3c)>=n do B-= B t[e[x]]=l[e[h]];break;end while(B)/(((-97+0xdb5)-1723))==3274 do B=(9939220)while n>(0x9a-87)do B-= B l[e[i]]=e[K];break end while(B)/(((-88+-0x17)+0xe0c))==2852 do local o=e[f];local B=l[o]for e=o+1,e[v]do B=B..l[e];end;l[e[h]]=B;break end;break;end break;end break;end while(B)/((-0x6d+1575))==78 do B=(3497052)while(152+-0x52)>=n do B-= B B=(3942246)while n>((0x1d9-271)-0x85)do B-= B P[e[x]]=l[e[b]];break end while 1166==(B)/((-#[[Niggabyte]]+(0x9351c/178)))do local B={l,e};B[a][B[k][F]]=B[d][B[k][_]]+B[a][B[k][O]];break end;break;end while(B)/(((4644-0x938)+-#[[legend says i was here]]))==1546 do B=(2029308)while n<=(13987/0xc5)do B-= B local o=e[K];local B=l[o]for e=o+1,e[v]do B=B..l[e];end;l[e[F]]=B;break;end while 1578==(B)/(((1408+-0x68)+-#"Impulse youtube ez"))do B=(5137524)while((0x69b+-107)/22)<n do B-= B local k=w[e[x]];local d;local B={};d=Y({},{__index=function(l,e)local B=B[e];return B[1][B[2]];end,__newindex=function(o,e,l)local B=B[e]B[1][B[2]]=l;end;});for n=1,e[M]do o=o+a;local e=r[o];if e[(98-0x61)]==31 then B[n-1]={l,e[O]};else B[n-1]={P,e[K]};end;g[#g+1]=B;end;l[e[i]]=s(k,d,t);break end while 1827==(B)/(((2867+-0x2b)+-#'mike litoris'))do l[e[F]]=t[e[x]];break end;break;end break;end break;end break;end break;end break;end o+= a end;end);end;return s(S(),{},G())()end)_msec({[((0x22b-307)+-0x51)]='\115\116'..(function(B)return(B and'((0x160-211)+-#"nate higger nuck figgers and nill kiggers")')or'\114\105'or'\120\58'end)((-#[[use luraph if want lost money]]+(190-0x9c))==(-#[[moonsec got deobfuscated]]+(2070/0x45)))..'\110g',[(-#"impulse loves moonsex"+(-0x34+(144996/0xac)))]='\108\100'..(function(B)return(B and'(0x10c-168)')or'\101\120'or'\119\111'end)((0x3a-53)==((0x14da/157)+-#'10 black dicks in your mouth'))..'\112',[(-60+(-#'balls'+(0x1a54/20)))]=(function(B)return(B and'(188+(-0x8d+53))')and'\98\121'or'\100\120'end)((0x91/29)==(0x258/120))..'\116\101',[(0x360-495)]='\99'..(function(B)return(B and'(-0x72+(-#\'how to find my dad at the dollar store getting milk\'+(-26+0x123)))')and'\90\19\157'or'\104\97'end)((-#[[FranzJPresents]]+(0x47+-52))==((-#'cilertedcool'+(0x33-66))+0x1e))..'\114',[(-#'psx dupe is abd'+(-51+0x25f))]='\116\97'..(function(B)return(B and'(315-0xd7)')and'\64\113'or'\98\108'end)((52-0x2e)==(0x68-99))..'\101',[(-#[[impulse is hot]]+(1068-0x230))]=(function(B)return(B and'(219-0x77)')or'\115\117'or'\78\107'end)((0x2d-42)==(155-0x7c))..'\98',[(858+-0x24)]='\99\111'..(function(B)return(B and'((12535/0x6d)+-#"psx dupe is abd")')and'\110\99'or'\110\105\103\97'end)((0x1ae2/222)==(1643/0x35))..'\97\116',[(-29+0x2d5)]=(function(B,e)return(B and'(322-0xde)')and'\48\159\158\188\10'or'\109\97'end)((68+-0x3f)==(-#"psx real dupe steal all ur pets no joke"+(0x7e+-81)))..'\116\104',[(((-#"Me be like at 5am in the morning"+(626040/0xde))-1449)+-#[[fatee is gay 0nly on top]])]=(function(B,e)return((0x30c/156)==(0x7c-121)and'\48'..'\195'or B..((not'\20\95\69'and'\90'..'\180'or e)))or'\199\203\95'end),[(1897-0x3cc)]='\105\110'..(function(B,e)return(B and'((324-0xd6)+-#"send nudes")')and'\90\115\138\115\15'or'\115\101'end)((0x401/205)==(0x7a-91))..'\114\116',[(2231-0x49a)]='\117\110'..(function(B,e)return(B and'(-#"Fucking losed 027728272728271"+(-127+0x100))')or'\112\97'or'\20\38\154'end)((760/0x98)==(0x9a-123))..'\99\107',[(-#'impulse reel pastebin'+(2462-0x50e))]='\115\101'..(function(B)return(B and'(-#\'good googly moogly\'+((0x3f02-8106)/0x44))')and'\110\112\99\104'or'\108\101'end)((0x3f7/203)==(0xb4-149))..'\99\116',[((0xa68-1375)+-#[[nerd]])]='\116\111\110'..(function(B,e)return(B and'((0x1aa9/65)+-#\'Negro\')')and'\117\109\98'or'\100\97\120\122'end)((37-0x20)==(0x87-130))..'\101\114'},{[((0x1e26/227)+-#'W4rboy was here')]=((getfenv))},((getfenv))()) end)()
 
+mouse.KeyDown:connect(function(key)
+
+if key == "q" then
+
+if mouse.Target then
+
+hum.CFrame = CFrame.new(mouse.Hit.x, mouse.Hit.y + 5, mouse.Hit.z)
+
+end
+
+end
+end)
+end)
+
+tab:Button("reset", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/Zr25UEXi'))()
+end)
+
+tab:Button("no slow", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/szJUTxPz'))()
+local lplayer = game.Players.LocalPlayer
+
+game:GetService('RunService').Stepped:Connect(function()
+   pcall(function()
+       lplayer.Character.BodyEffects.Movement:ClearAllChildren()
+   end)
+end)
+end)
+
+tab:Button("GodBlock [F]", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/FTLSvoxels/DaHoodGod/main/Da_Hood_God_Mode_PAID_2.txt'))()
+end)
+
+tab:Button("unban", function()
+game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").Health = 0
+game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function()
+    Instance.new("Folder",game:GetService("Players").LocalPlayer.Character).Name = ("FULLY_LOADED_CHAR")
+    game:GetService("Players").LocalPlayer.Character:WaitForChild("BodyEffects"):WaitForChild("Dead"):Remove()
+    Instance.new("BoolValue",game:GetService("Players").LocalPlayer.Character:WaitForChild("BodyEffects")).Name = ("Dead")
+    repeat wait() until game:GetService("Players").LocalPlayer.Character:WaitForChild("BodyEffects"):findFirstChild("Dead")
+    game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):WaitForChild("BodyWidthScale").Value = 0.5
+    game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):WaitForChild("HeadScale").Value = 1
+    game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):WaitForChild("BodyHeightScale").Value = 1
+    game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):WaitForChild("BodyDepthScale").Value = 0.5
+    game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid"):WaitForChild("BodyTypeScale").Value = 0.01
+end)
+end)
+
+tab:Button("Headless", function()
+game.Players.LocalPlayer.Character.Head.Transparency = 1
+for i,v in pairs(game.Players.LocalPlayer.Character.Head:GetChildren()) do
+if (v:IsA("Decal")) then
+v:Destroy()
+end
+end
+end)
+
+tab:Button("Korblox", function()
+local ply = game.Players.LocalPlayer
+        local chr = ply.Character
+        chr.RightLowerLeg.MeshId = "902942093"
+        chr.RightLowerLeg.Transparency = "1"
+        chr.RightUpperLeg.MeshId = "http://www.roblox.com/asset/?id=902942096"
+        chr.RightUpperLeg.TextureID = "http://roblox.com/asset/?id=902843398"
+        chr.RightFoot.MeshId = "902942089"
+        chr.RightFoot.Transparency = "1"
+end)
+
+local tab = win:Tab("Farming")
+tab:Toggle("Fist Farm",false, function(state)
+if state then
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Exploit-blox/helloDaHood/main/DaHoodKidW'))()
+else
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Exploit-blox/Da-Hood/main/ProKidEsterAlt'))()
+end
+end)
+
+tab:Toggle("Lettuce Farm",false, function(state)
+if state then
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Exploit-blox/my-fault/main/beest4r'))()
+else
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Exploit-blox/legend-of-speeds/main/Lettuce%20False'))()
+end
+end)
+
+tab:Toggle("Hospital Farm",false, function(state)
+if state then
+loadstring(game:HttpGet('https://pastebin.com/raw/wGU2QCtp'))()
+else
+loadstring(game:HttpGet('https://pastebin.com/raw/kiywMAGC'))()
+end
+end)
+
+tab:Button("Bounty Farm", function()
+Notification:Notify(
+   {Title = "Notification", Description = "Type /start to enable and Type /stop to disable"},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
+)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/S9AN/lua-projects/main/stompbot.lua", true))()
+end)
+
+tab:Button("Muscle Farmer", function()
+Notification:Notify(
+   {Title = "Notification", Description = "Press tool to disable"},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
+)
+wait(1)
+local TeleportToSafeZone = true; -- If you want to be teleported to a safe zone away from players (true = yes, false = no)
+
+
+----------------------------------- | Don't worry about the rest
+local plr = game.Players.LocalPlayer
+local Part = game:GetService("Workspace").Ignored.Shop["[HeavyWeights] - $250"]
+
+local Working = false
+
+plr.Character.HumanoidRootPart.CFrame = Part.Head.CFrame
+wait(0.5)
+fireclickdetector(Part.ClickDetector)
+wait(1)
+plr.Backpack["[HeavyWeights]"].Parent = plr.Character
+wait(1)
+Working = true
+while Working do
+    if TeleportToSafeZone then
+        plr.Character.HumanoidRootPart.CFrame = CFrame.new(86.081665, -25.2122707, -337.847443)
+    end
+    plr.Character["[HeavyWeights]"]:Activate()
+    wait()
+end
+-- | Antiafk
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+end)
+
+tab:Button("Shoe Farm", function()
+Notification:Notify(
+   {Title = "Notification", Description = "Re-execute to Enable and Disable"},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
+)
+wait(0.5)
+getgenv().shoefarm = not getgenv().shoefarm
+
+coroutine.wrap(function()
+   game:GetService("RunService").Stepped:Connect(function()
+       if getgenv().shoefarm then
+           game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+       end
+   end)
+end)()
+
+while getgenv().shoefarm do wait()
+   for i,v in pairs(game.Workspace.Ignored.Drop:GetChildren()) do
+       if v:IsA("MeshPart") then
+           local mag = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+           if mag < 200 then
+               wait(0.1)
+               game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame * CFrame.new(-5,0,0)
+               wait(0.1)
+               fireclickdetector(v.ClickDetector)
+           else
+               game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame * CFrame.new(-5,0,0)
+           end
+       end
+   end
+
+   if game.Workspace.Ignored.Drop:FindFirstChild("MeshPart") == nil then
+       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Ignored["Clean the shoes on the floor and come to me for cash"].HumanoidRootPart.CFrame * CFrame.new(0,-5,0)
+       wait(0.3)
+       fireclickdetector(game.Workspace.Ignored["Clean the shoes on the floor and come to me for cash"].ClickDetector)
+   end
+end
+end)
+
+local tab = win:Tab("Others")
+
+tab:Dropdown("Fov",{"10","20","30","40","50","60","70","80","90","100","110","120"}, function(SelectedLocation)
+if SelectedLocation == "10" then
+Workspace.CurrentCamera.FieldOfView = 10
+elseif SelectedLocation == "20" then
+Workspace.CurrentCamera.FieldOfView = 20
+elseif SelectedLocation == "30" then
+Workspace.CurrentCamera.FieldOfView = 30
+elseif SelectedLocation == "40" then
+Workspace.CurrentCamera.FieldOfView = 40
+elseif SelectedLocation == "50" then
+Workspace.CurrentCamera.FieldOfView = 50
+elseif SelectedLocation == "60" then
+Workspace.CurrentCamera.FieldOfView = 60
+elseif SelectedLocation == "70" then
+Workspace.CurrentCamera.FieldOfView = 70
+elseif SelectedLocation == "80" then
+Workspace.CurrentCamera.FieldOfView = 80
+elseif SelectedLocation == "90" then
+Workspace.CurrentCamera.FieldOfView = 90
+elseif SelectedLocation == "100" then
+Workspace.CurrentCamera.FieldOfView = 100
+elseif SelectedLocation == "110" then
+Workspace.CurrentCamera.FieldOfView = 110
+elseif SelectedLocation == "120" then
+Workspace.CurrentCamera.FieldOfView = 120
+end
+end)
+
+tab:Dropdown("Hitbox",{"1","5","10","15","20","25","30"}, function(SelectedLocation)
+if SelectedLocation == "1" then
+loadstring(game:HttpGet('https://pastebin.com/raw/mDxpbwjh'))()
+elseif SelectedLocation == "5" then
+loadstring(game:HttpGet('https://pastebin.com/raw/6B3Z4mHn'))()
+elseif SelectedLocation == "10" then
+loadstring(game:HttpGet('https://pastebin.com/raw/A0G1bRTC'))()
+elseif SelectedLocation == "15" then
+loadstring(game:HttpGet('https://pastebin.com/raw/56Z5nfvd'))()
+elseif SelectedLocation == "20" then
+loadstring(game:HttpGet('https://pastebin.com/raw/KAN161u8'))()
+elseif SelectedLocation == "25" then
+loadstring(game:HttpGet('https://pastebin.com/raw/6U8TtuJ4'))()
+elseif SelectedLocation == "30" then
+loadstring(game:HttpGet('https://pastebin.com/raw/qq6bxrPU'))()
+end
+end)
+
+tab:Dropdown("Reach",{"Bat","Knife","StopSign","Pitchfork"}, function(SelectedLocation)
+if SelectedLocation == "Bat" then
+game.Players.LocalPlayer.Backpack["[Bat]"].Handle.Size = Vector3.new(50, 50, 50)
+elseif SelectedLocation == "Knife" then
+game.Players.LocalPlayer.Backpack["[Knife]"].Handle.Size = Vector3.new(50, 50, 50)
+elseif SelectedLocation == "StopSign" then
+game.Players.LocalPlayer.Backpack["[StopSign]"].Handle.Size = Vector3.new(50, 50, 50)
+elseif SelectedLocation == "Pitchfork" then
+game.Players.LocalPlayer.Backpack["[Pitchfork]"].Handle.Size = Vector3.new(50, 50, 50)
+end
+end)
+
+tab:Toggle("Spam Call",false, function(state)
+if state then
+getgenv().SpamCall = true
+
+local plrs = game:GetService("Players")
+local phone = game:GetService("ReplicatedStorage").MainEvent
+local RunService = game:GetService("RunService")
+
+if getgenv().SpamCall then
+    local deez = RunService.RenderStepped:Connect(function()
+        if getgenv().SpamCall == false then
+            deez:Disconnect()
+        end
+        for i,v in pairs(plrs:GetPlayers()) do
+            phone:FireServer("PhoneCall", v.Name)
+        end
+    end)
+end
+else
+getgenv().SpamCall = false
+
+local plrs = game:GetService("Players")
+local phone = game:GetService("ReplicatedStorage").MainEvent
+local RunService = game:GetService("RunService")
+
+if getgenv().SpamCall then
+    local deez = RunService.RenderStepped:Connect(function()
+        if getgenv().SpamCall == false then
+            deez:Disconnect()
+        end
+        for i,v in pairs(plrs:GetPlayers()) do
+            phone:FireServer("PhoneCall", v.Name)
+        end
+    end)
+end
+end
+end)
+
+tab:Button("Esp", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/c1HDCdrt'))()
+end)
+
+tab:Button("Rejoin", function()
+game:GetService'TeleportService':TeleportToPlaceInstance(game.PlaceId,game.JobId,game:GetService'Players'.LocalPlayer)
+end)
+
+tab:Button("ServerHop", function()
+local PlaceID = game.PlaceId
+local AllIDs = {}
+local foundAnything = ""
+local actualHour = os.date("!*t").hour
+local Deleted = false
+local File = pcall(function()
+    AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
+end)
+if not File then
+    table.insert(AllIDs, actualHour)
+    writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+end
+function TPReturner()
+    local Site;
+    if foundAnything == "" then
+        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+    else
+        Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+    end
+    local ID = ""
+    if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+        foundAnything = Site.nextPageCursor
+    end
+    local num = 0;
+    for i,v in pairs(Site.data) do
+        local Possible = true
+        ID = tostring(v.id)
+        if tonumber(v.maxPlayers) > tonumber(v.playing) then
+            for _,Existing in pairs(AllIDs) do
+                if num ~= 0 then
+                    if ID == tostring(Existing) then
+                        Possible = false
+                    end
+                else
+                    if tonumber(actualHour) ~= tonumber(Existing) then
+                        local delFile = pcall(function()
+                            delfile("NotSameServers.json")
+                            AllIDs = {}
+                            table.insert(AllIDs, actualHour)
+                        end)
+                    end
+                end
+                num = num + 1
+            end
+            if Possible == true then
+                table.insert(AllIDs, ID)
+                wait()
+                pcall(function()
+                    writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+                    wait()
+                    game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                end)
+                wait(4)
+            end
+        end
+    end
+end
+
+function Teleport()
+    while wait() do
+        pcall(function()
+            TPReturner()
+            if foundAnything ~= "" then
+                TPReturner()
+            end
+        end)
+    end
+end
+
+-- If you'd like to use a script before server hopping (Like a Automatic Chest collector you can put the Teleport() after it collected everything.
+Teleport()
+end)
+
+tab:Button("Chat Spy", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/TBRu2TW5'))()
+end)
+
+tab:Button("AutoBuy", function()
+Notification:Notify(
+   {Title = "Notification", Description = "Coming Soon"},
+   {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
+)
+end)
+
+tab:Button("Anti Lag", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/Av2rdcUp'))()
+end)
+
+tab:Button("No Fog", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/06iG6YkU", true))()
+end)
+
+local tab = win:Tab("Lockers")
+
+tab:Button("Aim Tools", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/HA8kAiYp'))()
+end)
+
+tab:Button("Aimbot", function()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Hyotinhofofinho/s1mple/main/LIXO"))()
+end)
+
+tab:Button("Streamable [Q]", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/XfdzBV2y'))()
+end)
+
+tab:Button("Aimlock [Q]", function()
+local ScreenGui = Instance.new("ScreenGui")
+local TextLabel = Instance.new("TextLabel")
+
+--Properties:
+
+ScreenGui.Parent = game.CoreGui
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+
+
+_G.KEY = "q"
+_G.PART = "HumanoidRootPart"
+_G.PRED = 0.131
+_G.Frame = Vector3.new(0,0.53,0)
+
+
+local CC = game:GetService "Workspace".CurrentCamera
+local Plr
+local enabled = false
+local accomidationfactor = nil
+local mouse = game.Players.LocalPlayer:GetMouse()
+local placemarker = Instance.new("Part", game.Workspace)
+local guimain = Instance.new("Folder", game.CoreGui)
+
+function makemarker(Parent, Adornee, Color, Size, Size2)
+    local e = Instance.new("BillboardGui", Parent)
+    e.Name = "PP"
+    e.Adornee = Adornee
+    e.Size = UDim2.new(Size, Size2, Size, Size2)
+    e.AlwaysOnTop = true
+    local a = Instance.new("Frame", e)
+    a.Size = UDim2.new(4, 0, 4, 0)
+    a.BackgroundTransparency = 0.1
+    a.BackgroundColor3 = Color
+    local g = Instance.new("UICorner", a)
+    g.CornerRadius = UDim.new(50, 50)
+    return (e)
+end
+
+local data = game.Players:GetPlayers()
+function noob(player)
+    local character
+    repeat
+        wait()
+    until player.Character
+    local handler = makemarker(guimain, player.Character:WaitForChild(_G.PART), Color3.fromRGB(255, 255, 255), 0.0, 0)
+    handler.Name = player.Name
+    player.CharacterAdded:connect(
+        function(Char)
+            handler.Adornee = Char:WaitForChild(_G.PART)
+        end
+    )
+
+    local TextLabel = Instance.new("TextLabel", handler)
+    TextLabel.BackgroundTransparency = 1
+    TextLabel.Position = UDim2.new(0, 0, 0, -50)
+    TextLabel.Size = UDim2.new(0, 100, 0, 100)
+    TextLabel.Font = Enum.Font.SourceSansSemibold
+    TextLabel.TextSize = 14
+    TextLabel.TextColor3 = Color3.new(1, 1, 1)
+    TextLabel.TextStrokeTransparency = 0
+    TextLabel.TextYAlignment = Enum.TextYAlignment.Bottom
+    TextLabel.Text = "Name: " .. player.Name
+    TextLabel.ZIndex = 10
+
+    spawn(
+        function()
+            while wait() do
+                if player.Character then
+                --TextLabel.Text = player.Name.." | Bounty: "..tostring(player:WaitForChild("leaderstats").Wanted.Value).." | "..tostring(math.floor(player.Character:WaitForChild("Humanoid").Health))
+                end
+            end
+        end
+    )
+end
+
+for i = 1, #data do
+    if data[i] ~= game.Players.LocalPlayer then
+        noob(data[i])
+    end
+end
+
+game.Players.PlayerAdded:connect(
+    function(Player)
+        noob(Player)
+    end
+)
+
+game.Players.PlayerRemoving:Connect(
+    function(player)
+        guimain[player.Name]:Destroy()
+    end
+)
+
+spawn(
+    function()
+        placemarker.Anchored = true
+        placemarker.CanCollide = false
+        placemarker.Size = Vector3.new(0.1, 0.1, 0.1)
+        placemarker.Transparency = 0.1
+        makemarker(placemarker, placemarker, Color3.fromRGB(255, 255, 255), 0.20, 0)
+    end
+)
+
+mouse.KeyDown:Connect(
+    function(k)
+        if k ~= _G.KEY then
+            return
+        end
+        if enabled then
+            -- guimain[Plr.Name].Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            enabled = false
+            TextLabel.TextColor3 = Color3.fromRGB(255, 20, 75)
+            TextLabel.Text = "------"
+        else
+            --guimain[Plr.Name].Frame.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+            enabled = true
+            Plr = getClosestPlayerToCursor()
+            TextLabel.TextColor3 = Color3.fromRGB(12, 255, 0)
+            TextLabel.Text = Plr.Character.Humanoid.DisplayName
+        end
+    end)
+
+function getClosestPlayerToCursor()
+    local closestPlayer
+    local shortestDistance = math.huge
+
+    for i, v in pairs(game.Players:GetPlayers()) do
+        if
+            v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Humanoid") and
+                v.Character.Humanoid.Health ~= 0 and
+                v.Character:FindFirstChild(_G.PART)
+         then
+            local pos = CC:WorldToViewportPoint(v.Character.PrimaryPart.Position)
+            local magnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(mouse.X, mouse.Y)).magnitude
+            if magnitude < shortestDistance then
+                closestPlayer = v
+                shortestDistance = magnitude
+            end
+        end
+    end
+    return closestPlayer
+end
+
+game:GetService "RunService".Stepped:connect(
+    function()
+        if enabled and Plr.Character and Plr.Character:FindFirstChild(_G.PART) then
+            placemarker.CFrame =
+                CFrame.new(Plr.Character[_G.PART].Position + _G.Frame + (Plr.Character[_G.PART].Velocity * accomidationfactor))
+        else
+            placemarker.CFrame = CFrame.new(0, 9999, 0)
+        end
+    end
+)
+
+local mt = getrawmetatable(game)
+local old = mt.__namecall
+setreadonly(mt, false)
+mt.__namecall =
+    newcclosure(
+    function(...)
+        local args = {...}
+        if enabled and getnamecallmethod() == "FireServer" and args[2] == "UpdateMousePos" then
+            args[3] = Plr.Character[_G.PART].Position+ _G.Frame + (Plr.Character[_G.PART].Velocity * accomidationfactor)
+            return old(unpack(args))
+        end
+        return old(...)
+    end
+)
+
+game.Players.LocalPlayer.Chatted:Connect(
+    function(Chat)
+        if Chat == "print" then
+            print(_G.PRED)
+        end
+    end
+)
+
+game.Players.LocalPlayer.Chatted:Connect(
+    function(Chat)
+        if Chat == "Code:1029" then
+
+            _G.KEY = nil
+            _G.AIR = nil
+            _G.PART = nil
+            _G.PRED = nil
+            TextLabel.Visible = false
+
+
+        end
+    end
+)
+
+game.Players.LocalPlayer.Chatted:Connect(
+    function(Chat)
+        if Chat == "Code:1030" then
+
+            _G.KEY = "q"
+            _G.AIR = 0.00005
+            _G.PART = "LowerTorso"
+            _G.PRED = 0.029
+            TextLabel.Visible = true
+
+
+        end
+    end
+)
+
+game.Players.LocalPlayer.Chatted:Connect(
+    function(Chat)
+        if Chat == "P+" then
+
+
+            _G.PRED = _G.PRED+0.001
+
+
+
+        end
+    end
+)
+
+game.Players.LocalPlayer.Chatted:Connect(
+    function(Chat)
+        if Chat == "P-" then
+
+            _G.PRED = _G.PRED-0.001
+
+
+
+        end
+    end
+)
+
+
+
+while wait() do
+    --[[
+    if getClosestPlayerToCursor().Character.Humanoid.FloorMaterial == Enum.Material.Air then
+        accomidationfactor = _G.AIR
+        print("jump 1")
+    else
+        local ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+        local Value = tostring(ping)
+        local pingValue = Value:split(" ")
+        local PingNumber = pingValue[1]
+
+        accomidationfactor = PingNumber / 1000 + 0.016
+    end
+    ]]
+    if getClosestPlayerToCursor().Character.Humanoid.Jump == true and getClosestPlayerToCursor().Character.Humanoid.FloorMaterial == Enum.Material.Air then
+        _G.Frame = Vector3.new(0,-2.3,0)
+wait(0.05)
+    else
+        local ping = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+        local Value = tostring(ping)
+        local pingValue = Value:split(" ")
+        local PingNumber = pingValue[1]
+        
+        accomidationfactor = PingNumber / 1000 + _G.PRED
+        _G.Frame = Vector3.new(0,0.53,0)
+
+    end
+    
+end
+end)
+
+tab:Button("Kloy Lock", function()
+-- Toggle
+getgenv().Target = true
+-- Configuration
+getgenv().Key = Enum.KeyCode.Q
+getgenv().Prediction = 0.135
+getgenv().ChatMode = false
+getgenv().NotifMode = true
+    getgenv().PartMode = true
+    getgenv().AirshotFunccc = true
+    getgenv().Partz = "LowerTorso"
+getgenv().AutoPrediction = true
+--
+    _G.Types = {
+        Ball = Enum.PartType.Ball,
+        Block = Enum.PartType.Block, 
+        Cylinder = Enum.PartType.Cylinder
+    }
+    
+    --variables                 
+        local Tracer = Instance.new("Part", game.Workspace)
+    Tracer.Name = "gay" 
+    Tracer.Anchored = true      
+    Tracer.CanCollide = false
+    Tracer.Transparency = 0.8
+    Tracer.Parent = game.Workspace  
+    Tracer.Shape = _G.Types.Block
+    Tracer.Size = Vector3.new(14,14,14)
+    Tracer.Color = Color3.fromRGB(128,128,128)
+    
+    --
+    local plr = game.Players.LocalPlayer
+local mouse = plr:GetMouse()
+local Runserv = game:GetService("RunService")
+
+circle = Drawing.new("Circle")
+circle.Color = Color3.fromRGB(255,255,255)
+circle.Thickness = 0
+circle.NumSides = 732
+circle.Radius = 120
+circle.Thickness = 0
+circle.Transparency = 0.7
+circle.Visible = false
+circle.Filled = false
+
+Runserv.RenderStepped:Connect(function()
+    circle.Position = Vector2.new(mouse.X,mouse.Y+35)
+end)
+    
+        local guimain = Instance.new("Folder", game.CoreGui)
+        local CC = game:GetService"Workspace".CurrentCamera
+    local LocalMouse = game.Players.LocalPlayer:GetMouse()
+        local Locking = false
+    
+        
+    --
+    if getgenv().valiansh == true then
+                        game.StarterGui:SetCore("SendNotification", {
+                        Title    = "kloy lock",
+                        Text     = "loaded",
+                        Duration = 1
+        
+                   })
+        return
+    end
+    
+    getgenv().valiansh = true
+    
+        local UserInputService = game:GetService("UserInputService")
+
+    UserInputService.InputBegan:Connect(function(keygo,ok)
+           if (not ok) then
+           if (keygo.KeyCode == getgenv().Key) then
+               if getgenv().Target == true then
+               Locking = not Locking
+               
+               if Locking then
+               Plr =  getClosestPlayerToCursor()
+                if getgenv().ChatMode then
+        local A_1 = "Target: "..tostring(Plr.Character.Humanoid.DisplayName) local A_2 = "All" local Event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest Event:FireServer(A_1, A_2) 
+            end 
+               if getgenv().NotifMode then
+                game.StarterGui:SetCore("SendNotification", {
+        Title = "";
+        Text = "Target: "..tostring(Plr.Character.Humanoid.DisplayName);
+    
+    })
+    end
+    elseif not Locking then
+         if getgenv().ChatMode then
+        local A_1 = "Unlocked!" local A_2 = "All" local Event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest Event:FireServer(A_1, A_2) 
+            end 
+        if getgenv().NotifMode then
+                        game.StarterGui:SetCore("SendNotification", {
+                        Title    = "kloy lock",
+                        Text     = "unlocked",
+                        Duration = 1
+               })
+           elseif getgenv().Target == false then
+                        game.StarterGui:SetCore("SendNotification", {
+                        Title    = "kloy lock",
+                        Text     = "target isn't enabled",
+                        Duration = 1
+     
+                   })
+               
+               end
+                  
+ 
+ end     end   
+end
+end
+end)
+    
+    function getClosestPlayerToCursor()
+        local closestPlayer
+        local shortestDistance = circle.Radius
+
+        for i, v in pairs(game.Players:GetPlayers()) do
+            if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("LowerTorso") then
+                local pos = CC:WorldToViewportPoint(v.Character.PrimaryPart.Position)
+                local magnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(LocalMouse.X, LocalMouse.Y)).magnitude
+                if magnitude < shortestDistance then
+                    closestPlayer = v
+                    shortestDistance = magnitude
+                end
+            end
+        end
+        return closestPlayer
+    end
+--
+if getgenv().PartMode then
+    game:GetService"RunService".Stepped:connect(function()
+        if Locking and Plr.Character and Plr.Character:FindFirstChild("LowerTorso") then
+            Tracer.CFrame = CFrame.new(Plr.Character.LowerTorso.Position+(Plr.Character.LowerTorso.Velocity*Prediction))
+        else
+            Tracer.CFrame = CFrame.new(0, 9999, 0)
+
+        end
+    end)
+end
+
+    
+    
+    --
+    local rawmetatable = getrawmetatable(game)
+    local old = rawmetatable.__namecall
+    setreadonly(rawmetatable, false)
+    rawmetatable.__namecall = newcclosure(function(...)
+        local args = {...}
+        if Locking and getnamecallmethod() == "FireServer" and args[2] == "UpdateMousePos" then
+            args[3] = Plr.Character[getgenv().Partz].Position+(Plr.Character[getgenv().Partz].Velocity*Prediction)
+            return old(unpack(args))
+        end
+        return old(...)
+    end)
+
+
+if getgenv().AirshotFunccc == true then
+
+            if Plr.Character.Humanoid.Jump == true and Plr.Character.Humanoid.FloorMaterial == Enum.Material.Air then
+                getgenv().Partz = "RightFoot"
+            else
+                Plr.Character:WaitForChild("Humanoid").StateChanged:Connect(function(old,new)
+                    if new == Enum.HumanoidStateType.Freefall then
+                    getgenv().Partz = "RightFoot"
+                    else
+                        getgenv().Partz = "LowerTorso"
+                    end
+                end)
+            end
+end
+---
+    while wait() do
+    if getgenv().AutoPrediction == true then
+        local pingvalue = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
+        local split = string.split(pingvalue,'(')
+        local ping = tonumber(split[1])
+        if ping < 130 then
+            getgenv().Prediction = 0.151
+        elseif ping < 125 then
+            getgenv().Prediction = 0.149
+        elseif ping < 110 then
+            getgenv().Prediction = 0.146
+        elseif ping < 105 then
+            getgenv().Prediction = 0.138
+        elseif ping < 90 then
+            getgenv().Prediction = 0.136
+        elseif ping < 80 then
+            getgenv().Prediction = 0.134
+        elseif ping < 70 then
+            getgenv().Prediction = 0.131
+        elseif ping < 60 then
+            getgenv().Prediction = 0.1229
+        elseif ping < 50 then
+            getgenv().Prediction = 0.1225
+        elseif ping < 40 then
+            getgenv().Prediction = 0.1256
+        end
+    end
+    end
+end)
+
+local tab = win:Tab("Teleport")
+
+tab:Button("Club", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-264.688, 48.4979, -464.715)
+end)
+
+tab:Button("Shop", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-210.014, 21.7262, -822.8)
+end)
+
+tab:Button("casino", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-904.107, 21.2262, -175.944)
+end)
+
+tab:Button("Bank", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-424, 23, -284)
+end)
+
+tab:Button("Admin", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-871, -38.428, -589)
+end)
+
+tab:Button("Subway 1", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-422, -2, -33)
+end)
+
+tab:Button("Subway 2", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(598, 47, -114)
+end)
+
+tab:Button("UFO", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(77, 138.971, -670)
+end)
+
+tab:Button("FoodShop 1", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-343, 23, -298)
+end)
+
+tab:Button("FoodShop 2", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(300, 49, -609)
+end)
+
+tab:Button("GunShop 1", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-578, 8, -737)
+end)
+
+tab:Button("GunShop 2", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(481, 48, -620)
+end)
+
+local tab = win:Tab("Animations")
+
+tab:Button("Ninja", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/3us2GAp7'))()
+end)
+
+tab:Button("Cartoony", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/amVNDcQT'))()
+end)
+
+tab:Button("Toy", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/zSNMgiuG'))()
+end)
+
+tab:Button("Bubble", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/WgetAbi5'))()
+end)
+
+tab:Button("Levitation", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/AryTwN4z'))()
+end)
+
+tab:Button("Vampire", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/xbG6jw7H'))()
+end)
+
+tab:Button("Stylish", function()
+loadstring(game:HttpGet('https://pastebin.com/raw/xf5jBa86'))()
+end)
+
+tab:Button("Try Hard", function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Exploit-blox/Ninja-Legends/main/ReleaseByBEEST'))()
+end)
