@@ -18,10 +18,10 @@ local lib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scri
 local win = lib:Window("Da Guix",Color3.fromRGB(44, 120, 224), Enum.KeyCode.RightControl)
 
 local tab = win:Tab("Credits")
-tab:Label("Made By BEEST4R#2746")
+tab:Label("Made By ClownzZ#2746")
 tab:Label("Notification By BocusLuke")
 
-tab:Button("Copy Link Youtube BEEST4R", function()
+tab:Button("Copy Link Youtube ClownzZ", function()
 Notification:Notify(
    {Title = "Notification", Description = "Link Copied Check Clipboard"},
    {OutlineColor = Color3.fromRGB(80, 80, 80),Time = 5, Type = "default"}
